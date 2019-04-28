@@ -3,6 +3,7 @@ import './App.css';
 import { SolutionDisplay } from './components/SolutionDisplay';
 import { SolutionBuilder } from './components/SolutionBuilder';
 import { Solution } from './solver/towers.interface';
+import Footer from './components/Footer';
 
 interface AppState {
   discs: number,
@@ -31,6 +32,7 @@ class App extends React.Component {
       <div className="App">
         <SolutionBuilder setSolution={this.setSolution} />
         <SolutionDisplay discs={this.state.discs} solution={this.state.solution} solutionId={this.state.solutionId} />
+        <Footer />
       </div>
     );
   }
