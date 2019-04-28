@@ -1,0 +1,9 @@
+div.solution>*{
+  margin-left:10px;
+  vertical-align:middle;
+}
+
+span.number {
+  display: inline-block;
+  width: 20px;
+}

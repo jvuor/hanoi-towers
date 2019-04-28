@@ -1,5 +1,6 @@
 import React from 'react'
 import solve from '../solver/recursive';
+import './solutionBuilder.css';
 import { Solution } from '../solver/towers.interface';
 
 export interface SolutionBuilderProps {
@@ -33,7 +34,7 @@ export class SolutionBuilder extends React.Component<SolutionBuilderProps> {
  
   render() {
     return(
-      <div>
+      <div className="solution">
         <label htmlFor="discs">Set the number of discs</label>
         <input
           name="discs"
@@ -43,7 +44,7 @@ export class SolutionBuilder extends React.Component<SolutionBuilderProps> {
           value={this.state.discAmount}
           onChange={this.setDiscs}
         />
-        {this.state.discAmount}
+        <span className="number">{this.state.discAmount}</span>
         <button onClick={this.solve}>Solve</button>
       </div>
     )
