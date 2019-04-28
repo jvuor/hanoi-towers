@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/hanoi-towers/static/css/main.83ab8b0e.chunk.css",
+    "main.js": "/hanoi-towers/static/js/main.3c6a8b28.chunk.js",
+    "main.js.map": "/hanoi-towers/static/js/main.3c6a8b28.chunk.js.map",
+    "runtime~main.js": "/hanoi-towers/static/js/runtime~main.d603b755.js",
+    "runtime~main.js.map": "/hanoi-towers/static/js/runtime~main.d603b755.js.map",
+    "static/js/2.6408f43b.chunk.js": "/hanoi-towers/static/js/2.6408f43b.chunk.js",
+    "static/js/2.6408f43b.chunk.js.map": "/hanoi-towers/static/js/2.6408f43b.chunk.js.map",
+    "index.html": "/hanoi-towers/index.html",
+    "precache-manifest.88d18f6ec26269010711b324de73797d.js": "/hanoi-towers/precache-manifest.88d18f6ec26269010711b324de73797d.js",
+    "service-worker.js": "/hanoi-towers/service-worker.js",
+    "static/css/main.83ab8b0e.chunk.css.map": "/hanoi-towers/static/css/main.83ab8b0e.chunk.css.map"
+  }
+}
