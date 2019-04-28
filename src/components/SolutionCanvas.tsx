@@ -5,34 +5,23 @@ export interface SolutionCanvasProps {
   discLocations: number[]
 }
 
+interface SolutionCanvasState {
+  width: number,
+  height: number
+}
+
 export default class SolutionCanvas extends React.Component<SolutionCanvasProps> {
-  width:number
-  height:number
+  state: SolutionCanvasState;
+
   rods: number[];
   rodsNr: number;
-  rodHeight: number;
-  discsAtRod: number[];
   canvas: HTMLCanvasElement;
   ctx: CanvasRenderingContext2D;
 
   constructor(props: SolutionCanvasProps) {
     super(props);
-
     this.rodsNr = 3;
-   
-    const widthOfTheLargestDisc = 40 + (20 * this.props.discs)
-    this.width = widthOfTheLargestDisc * this.rodsNr + (20 * this.rodsNr) + 40;
-    this.height = (this.props.discs * 20) + 60;
-    this.rodHeight = this.height - 40;
-
-    let rodSpot = 20 + widthOfTheLargestDisc / 2;
-    let rodInterval = widthOfTheLargestDisc + 10;
-    this.rods = new Array(this.rodsNr).fill(null);
-    this.rods = this.rods.map(rod => {
-      const spot = rodSpot;
-      rodSpot += rodInterval;
-      return spot
-    });
+    this.state = {width: 100, height: 100};
   }
 
   componentDidMount() {
@@ -45,17 +34,35 @@ export default class SolutionCanvas extends React.Component<SolutionCanvasProps>
     this.drawBase();
   }
 
+  getHeigth = () => (this.props.discs * 20) + 60;
+  getWidthOfTheLargestDisc = () => 40 + (20 * this.props.discs)
+  getWidth = () => this.getWidthOfTheLargestDisc() * this.rodsNr + (20 * this.rodsNr);
+
   drawBase() {
+    const widthOfTheLargestDisc = this.getWidthOfTheLargestDisc();
+    const width = this.getWidth();
+    const height = this.getHeigth();
+    const rodHeight = height - 40;
+
+    let rodSpot = 20 + widthOfTheLargestDisc / 2;
+    let rodInterval = widthOfTheLargestDisc + 10;
+    this.rods = new Array(this.rodsNr).fill(null);
+    this.rods = this.rods.map(rod => {
+      const spot = rodSpot;
+      rodSpot += rodInterval;
+      return spot
+    });
+
     this.ctx.fillStyle = '#dddddd';
-    this.ctx.fillRect(0, 0, this.width, this.height);
+    this.ctx.fillRect(0, 0, width, height);
 
     this.ctx.beginPath();
     this.ctx.lineWidth = 4;
-    this.ctx.moveTo(0, this.height - 10);
-    this.ctx.lineTo(this.width, this.height - 10);
+    this.ctx.moveTo(0, height - 10);
+    this.ctx.lineTo(width, height - 10);
     this.rods.forEach(rod => {
-      this.ctx.moveTo(rod, this.height - 10);
-      this.ctx.lineTo(rod, (this.height - 10) - this.rodHeight);
+      this.ctx.moveTo(rod, height - 10);
+      this.ctx.lineTo(rod, (height - 10) - rodHeight);
     })
 
     this.ctx.stroke();
@@ -64,20 +71,20 @@ export default class SolutionCanvas extends React.Component<SolutionCanvasProps>
   }
 
   drawDiscs() {
-    this.discsAtRod = Array(this.rodsNr).fill(0);
+    const discsAtRod = Array(this.rodsNr).fill(0);
     let discWidth = 40 + (20 * this.props.discs)
     this.props.discLocations.forEach(disc => {
-      const discInitY = this.height - 10 - (this.discsAtRod[disc] * 20) - 20;
+      const discInitY = this.getHeigth() - 10 - (discsAtRod[disc] * 20) - 20;
       const discInitX = this.rods[disc] - (discWidth / 2);
       this.ctx.strokeRect(discInitX, discInitY, discWidth, 20);
       discWidth -= 20;
-      this.discsAtRod[disc] += 1;
+      discsAtRod[disc] += 1;
     })
   }
 
   render() {
     return (
-      <canvas ref="canvas" width={this.width} height={this.height}/>
+      <canvas ref="canvas" width={this.getWidth()} height={this.getHeigth()}/>
     )
   }
 }

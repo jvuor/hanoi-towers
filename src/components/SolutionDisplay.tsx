@@ -24,20 +24,25 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
       currentId: null,
       currentIndex: null,
       timer: null,
-      discLocations: []
+      discLocations: [0, 0, 0, 0, 0]
     };
   }
 
   componentDidUpdate = (oldProps: SolutionDisplayProps) => {
     if (oldProps.solutionId !== this.props.solutionId) {
+      console.log('new solution received');
+      const discLocations = [];
+      for (let i = 0; i < this.props.discs; i++) {
+        discLocations.push(0);
+      }
       this.setState({
         currentIndex: -1,
-        discLocations: Array(this.props.discs).fill(0)
+        discLocations
       });
       if(this.state.timer) {
         clearInterval(this.state.timer);
       }
-      const timer = setInterval(this.cycleSolution, 1000);
+      const timer = setInterval(this.cycleSolution, 200);
       this.setState({timer});
     }
   }
@@ -58,14 +63,13 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
     }
   }
 
-  topMostDisc(locations: number[]) {
-
-  }
+  getOptimalMoveCount = () => (2 ** this.props.discs) - 1
 
   render() {
     return(
       <div>
-        <SolutionCanvas discs={this.props.discs} discLocations={this.state.discLocations}/>
+        <SolutionCanvas discs={this.props.discs} discLocations={this.state.discLocations}/><br />
+        {`${this.state.currentIndex + 1} / ${this.getOptimalMoveCount()}`}
       </div>
     )
   }
