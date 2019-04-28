@@ -42,7 +42,7 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
       if(this.state.timer) {
         clearInterval(this.state.timer);
       }
-      const timer = setInterval(this.cycleSolution, 200);
+      const timer = setInterval(this.cycleSolution, this.getAnimationSpeed(this.props.discs));
       this.setState({timer});
     }
   }
@@ -60,6 +60,18 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
       const newLocations = [...this.state.discLocations];
       newLocations[newLocations.lastIndexOf(from)] = to;
       this.setState({ discLocations: newLocations, currentIndex: newIndex });
+    }
+  }
+
+  getAnimationSpeed = (discs) => {
+    if (discs < 6) {
+      return 750;
+    } else if (discs < 11) {
+      return 500;
+    } else if (discs < 16) {
+      return 200;
+    } else {
+      return 50;
     }
   }
 
