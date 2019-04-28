@@ -10,6 +10,30 @@ interface SolutionCanvasState {
   height: number
 }
 
+const palette: string[] = [
+  '#030603',
+  '#060C06',
+  '#091209',
+  '#0B170C',
+  '#0E1D0F',
+  '#112312',
+  '#142915',
+  '#162E18',
+  '#19341B',
+  '#1C3A1E',
+  '#1E3F20',
+  '#325034',
+  '#466148',
+  '#5B735C',
+  '#6F8471',
+  '#849685',
+  '#98A799',
+  '#ADB9AD',
+  '#C1CAC2',
+  '#D6DCD6',
+  '#EAEDEA'
+]
+
 export default class SolutionCanvas extends React.Component<SolutionCanvasProps> {
   state: SolutionCanvasState;
 
@@ -53,7 +77,7 @@ export default class SolutionCanvas extends React.Component<SolutionCanvasProps>
       return spot
     });
 
-    this.ctx.fillStyle = '#dddddd';
+    this.ctx.fillStyle = '#ffffff';
     this.ctx.fillRect(0, 0, width, height);
 
     this.ctx.beginPath();
@@ -73,10 +97,12 @@ export default class SolutionCanvas extends React.Component<SolutionCanvasProps>
   drawDiscs() {
     const discsAtRod = Array(this.rodsNr).fill(0);
     let discWidth = 40 + (20 * this.props.discs)
-    this.props.discLocations.forEach(disc => {
+    this.props.discLocations.forEach((disc, i) => {
       const discInitY = this.getHeigth() - 10 - (discsAtRod[disc] * 20) - 20;
       const discInitX = this.rods[disc] - (discWidth / 2);
-      this.ctx.strokeRect(discInitX, discInitY, discWidth, 20);
+
+      this.ctx.fillStyle = palette[i];
+      this.ctx.fillRect(discInitX, discInitY, discWidth, 20);
       discWidth -= 20;
       discsAtRod[disc] += 1;
     })
