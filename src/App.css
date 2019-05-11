@@ -1,5 +1,6 @@
 
 .container {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   background: white;
   border: 3px solid black;
   border-radius: 10px;
@@ -11,12 +12,17 @@
 }
 
 .container-header {
-  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   margin-bottom: 5px;
   font-size: 3em;
   padding: 5px;
   font-variant: small-caps;
-  text-shadow: 2px 2px 3px gray;
+  text-shadow: 2px 2px 0px white, -2px -2px 0px white, -2px 2px 0px white, 2px -2px 0px white
+}
+
+.header-effect {
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3) 25% 75%, transparent), 
+  linear-gradient(to bottom, white 55%, gray 55% 65%,  white 65% 100%);
+  margin: 0 30px;
 }
 
 .center {

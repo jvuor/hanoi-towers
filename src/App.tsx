@@ -32,8 +32,10 @@ class App extends React.Component {
     return (
       <div className="center">
         <div>
-          <div className="container container-header"> 
-          ―― Tower of Hanoi ――
+          <div className="container container-header">
+            <div className="header-effect">
+              Tower of Hanoi
+            </div>
           </div>
           <div className="container container-app">
             <SolutionBuilder setSolution={this.setSolution} />
