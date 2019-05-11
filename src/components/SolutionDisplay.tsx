@@ -1,4 +1,5 @@
 import React from 'react'
+import CircularProgressbar from 'react-circular-progressbar';
 import { Solution } from '../solver/towers.interface';
 import SolutionCanvas from './SolutionCanvas';
 
@@ -63,7 +64,7 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
     }
   }
 
-  getAnimationSpeed = (discs) => {
+  getAnimationSpeed = (discs: number): number => {
     if (discs < 6) {
       return 750;
     } else if (discs < 11) {
@@ -75,13 +76,37 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
     }
   }
 
-  getOptimalMoveCount = () => (2 ** this.props.discs) - 1
+  getOptimalMoveCount = (): number => (2 ** this.props.discs) - 1
+
+  getProgressPercentage = () : number => {
+    const progressPercentage = (this.state.currentIndex / this.props.solution.length) * 100;
+    return progressPercentage;
+  }
+
+  getProgressBar = (): any => {
+    if (!this.state.timer) {
+      return null;
+    }
+    return(
+      <div style={{width:'50px', margin:'auto', paddingTop:'10px'}}>
+        <CircularProgressbar 
+          percentage={this.getProgressPercentage()}
+          strokeWidth={20}
+          styles={{
+            path: { strokeLinecap: "butt" },
+            text: { fill: "#000" }
+          }}
+        />
+      </div>
+    )
+  }
 
   render() {
     return(
       <div>
         <SolutionCanvas discs={this.props.discs} discLocations={this.state.discLocations}/><br />
         {`${this.state.currentIndex + 1} / ${this.getOptimalMoveCount()}`}
+        {this.getProgressBar()}
       </div>
     )
   }
