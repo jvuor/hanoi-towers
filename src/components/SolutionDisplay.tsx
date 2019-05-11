@@ -4,6 +4,7 @@ import { distanceInWordsStrict, addMilliseconds } from 'date-fns'
 import { Solution } from '../util/towers.interface';
 import SolutionCanvas from './SolutionCanvas';
 import { palette } from '../util/palette';
+import { Hide } from './Hide';
 
 export interface SolutionDisplayProps {
   discs: number;
@@ -81,13 +82,16 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
   getOptimalMoveCount = (): number => (2 ** this.props.discs) - 1
 
   getProgressPercentage = () : number => {
+    if (!this.state.timer) {
+      return 0;
+    }
     const progressPercentage = (this.state.currentIndex / this.props.solution.length) * 100;
     return progressPercentage;
   }
 
   displayTimeRemaining = () => {
     if (!this.state.timer) {
-      return null;
+      return 'n/a';
     }
     const movesLeft = this.props.solution.length - this.state.currentIndex;
     const timeLeft_ms = movesLeft * this.getAnimationSpeed(this.props.discs);
@@ -98,9 +102,6 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
   }
 
   getProgressBar = (): any => {
-    if (!this.state.timer) {
-      return null;
-    }
     return(
       <div 
         style={{width:'50px', margin:'auto', paddingTop:'10px'}}
@@ -122,8 +123,10 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
       <div>
         <SolutionCanvas discs={this.props.discs} discLocations={this.state.discLocations}/><br />
         {`${this.state.currentIndex + 1} / ${this.getOptimalMoveCount()}`}
-        {this.getProgressBar()}
-        {this.displayTimeRemaining()}
+        <Hide hidden={!this.state.timer}>
+          {this.getProgressBar()}
+          {this.displayTimeRemaining()}
+        </Hide>
       </div>
     )
   }
