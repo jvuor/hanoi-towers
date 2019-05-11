@@ -33,7 +33,7 @@ class App extends React.Component {
       <div className="center">
         <div>
           <div className="container container-header"> 
-            --- Tower of Hanoi ---
+          ―― Tower of Hanoi ――
           </div>
           <div className="container container-app">
             <SolutionBuilder setSolution={this.setSolution} />
