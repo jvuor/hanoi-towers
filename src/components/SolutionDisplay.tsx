@@ -1,10 +1,11 @@
 import React from 'react'
 import CircularProgressbar from 'react-circular-progressbar';
+import { distanceInWordsStrict, addMilliseconds } from 'date-fns'
 import { Solution } from '../solver/towers.interface';
 import SolutionCanvas from './SolutionCanvas';
 
 export interface SolutionDisplayProps {
-  discs: number
+  discs: number;
   solution: Solution;
   solutionId: number;
 }
@@ -13,7 +14,7 @@ interface SolutionDisplayState {
   currentId: number;
   currentIndex: number;
   timer: NodeJS.Timeout;
-  discLocations: number[]
+  discLocations: number[];
 }
 
 export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
@@ -25,7 +26,7 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
       currentId: null,
       currentIndex: null,
       timer: null,
-      discLocations: [0, 0, 0, 0, 0]
+      discLocations: [0, 0, 0, 0, 0],
     };
   }
 
@@ -83,17 +84,31 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
     return progressPercentage;
   }
 
+  displayTimeRemaining = () => {
+    if (!this.state.timer) {
+      return null;
+    }
+    const movesLeft = this.props.solution.length - this.state.currentIndex;
+    const timeLeft_ms = movesLeft * this.getAnimationSpeed(this.props.discs);
+
+    const now = new Date();
+    const description = distanceInWordsStrict(now, addMilliseconds(now, timeLeft_ms));
+    return description + ' remaining';
+  }
+
   getProgressBar = (): any => {
     if (!this.state.timer) {
       return null;
     }
     return(
-      <div style={{width:'50px', margin:'auto', paddingTop:'10px'}}>
+      <div 
+        style={{width:'50px', margin:'auto', paddingTop:'10px'}}
+      >
         <CircularProgressbar 
           percentage={this.getProgressPercentage()}
-          strokeWidth={20}
+          strokeWidth={25}
           styles={{
-            path: { strokeLinecap: "butt" },
+            path: { strokeLinecap: "butt", stroke: '#6F8471' },
             text: { fill: "#000" }
           }}
         />
@@ -107,6 +122,7 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
         <SolutionCanvas discs={this.props.discs} discLocations={this.state.discLocations}/><br />
         {`${this.state.currentIndex + 1} / ${this.getOptimalMoveCount()}`}
         {this.getProgressBar()}
+        {this.displayTimeRemaining()}
       </div>
     )
   }
