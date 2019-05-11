@@ -1,7 +1,8 @@
 import React from 'react'
-import solve from '../solver/recursive';
+import solve from '../util/recursive';
 import './solutionBuilder.css';
-import { Solution } from '../solver/towers.interface';
+import { Solution } from '../util/towers.interface';
+import { newPalette } from '../util/palette';
 
 export interface SolutionBuilderProps {
   setSolution: (discs: number, solution: Solution) => void;
@@ -30,6 +31,7 @@ export class SolutionBuilder extends React.Component<SolutionBuilderProps> {
   solve = () => {
     const solution: Solution = solve(this.state.discAmount);
     this.props.setSolution(this.state.discAmount, solution);
+    newPalette();
   }
  
   render() {

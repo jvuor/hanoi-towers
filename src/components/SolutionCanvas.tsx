@@ -1,4 +1,5 @@
 import React from 'react';
+import { palette } from '../util/palette'; 
 
 export interface SolutionCanvasProps {
   discs: number;
@@ -9,30 +10,6 @@ interface SolutionCanvasState {
   width: number,
   height: number
 }
-
-const palette: string[] = [
-  '#030603',
-  '#060C06',
-  '#091209',
-  '#0B170C',
-  '#0E1D0F',
-  '#112312',
-  '#142915',
-  '#162E18',
-  '#19341B',
-  '#1C3A1E',
-  '#1E3F20',
-  '#325034',
-  '#466148',
-  '#5B735C',
-  '#6F8471',
-  '#849685',
-  '#98A799',
-  '#ADB9AD',
-  '#C1CAC2',
-  '#D6DCD6',
-  '#EAEDEA'
-]
 
 export default class SolutionCanvas extends React.Component<SolutionCanvasProps> {
   state: SolutionCanvasState;

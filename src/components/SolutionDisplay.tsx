@@ -1,8 +1,9 @@
 import React from 'react'
 import CircularProgressbar from 'react-circular-progressbar';
 import { distanceInWordsStrict, addMilliseconds } from 'date-fns'
-import { Solution } from '../solver/towers.interface';
+import { Solution } from '../util/towers.interface';
 import SolutionCanvas from './SolutionCanvas';
+import { palette } from '../util/palette';
 
 export interface SolutionDisplayProps {
   discs: number;
@@ -108,7 +109,7 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
           percentage={this.getProgressPercentage()}
           strokeWidth={25}
           styles={{
-            path: { strokeLinecap: "butt", stroke: '#6F8471' },
+            path: { strokeLinecap: "butt", stroke: palette[Math.floor(this.getProgressPercentage() / 6)] },
             text: { fill: "#000" }
           }}
         />

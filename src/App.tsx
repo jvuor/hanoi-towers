@@ -1,8 +1,9 @@
 import React from 'react';
+import 'normalize.css';
 import './App.css';
 import { SolutionDisplay } from './components/SolutionDisplay';
 import { SolutionBuilder } from './components/SolutionBuilder';
-import { Solution } from './solver/towers.interface';
+import { Solution } from './util/towers.interface';
 import Footer from './components/Footer';
 
 interface AppState {
@@ -29,10 +30,17 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
-        <SolutionBuilder setSolution={this.setSolution} />
-        <SolutionDisplay discs={this.state.discs} solution={this.state.solution} solutionId={this.state.solutionId} />
-        <Footer />
+      <div className="center">
+        <div>
+          <div className="container container-header"> 
+            --- Tower of Hanoi ---
+          </div>
+          <div className="container container-app">
+            <SolutionBuilder setSolution={this.setSolution} />
+            <SolutionDisplay discs={this.state.discs} solution={this.state.solution} solutionId={this.state.solutionId} />
+            <Footer />
+          </div>
+        </div>
       </div>
     );
   }
