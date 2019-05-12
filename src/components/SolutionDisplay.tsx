@@ -10,6 +10,7 @@ export interface SolutionDisplayProps {
   discs: number;
   solution: Solution;
   solutionId: number;
+  solutionTime: number;
 }
 
 interface SolutionDisplayState {
@@ -85,7 +86,7 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
     if (!this.state.timer) {
       return 0;
     }
-    const progressPercentage = (this.state.currentIndex / this.props.solution.length) * 100;
+    const progressPercentage = ((this.state.currentIndex + 1) / this.props.solution.length) * 100;
     return progressPercentage;
   }
 
@@ -98,7 +99,7 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
 
     const now = new Date();
     const description = distanceInWordsStrict(now, addMilliseconds(now, timeLeft_ms));
-    return description + ' remaining';
+    return 'Animation remaining: ' + description;
   }
 
   getProgressBar = (): any => {
@@ -125,6 +126,7 @@ export class SolutionDisplay extends React.Component<SolutionDisplayProps> {
         {`${this.state.currentIndex + 1} / ${this.getOptimalMoveCount()}`}
         <Hide hidden={!this.state.timer}>
           {this.getProgressBar()}
+          Calculating the solution took {this.props.solutionTime.toFixed(2)} ms<br />
           {this.displayTimeRemaining()}
         </Hide>
       </div>

@@ -5,7 +5,7 @@ import { Solution } from '../util/towers.interface';
 import { newPalette } from '../util/palette';
 
 export interface SolutionBuilderProps {
-  setSolution: (discs: number, solution: Solution) => void;
+  setSolution: (discs: number, solution: Solution, time: number) => void;
 }
 
 interface SolutionBuilderState {
@@ -29,8 +29,10 @@ export class SolutionBuilder extends React.Component<SolutionBuilderProps> {
   }
 
   solve = () => {
+    const start = performance.now();
     const solution: Solution = solve(this.state.discAmount);
-    this.props.setSolution(this.state.discAmount, solution);
+    const timeTaken = performance.now() - start;
+    this.props.setSolution(this.state.discAmount, solution, timeTaken);
     newPalette();
   }
  
