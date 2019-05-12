@@ -17,8 +17,11 @@ function generatePalette() {
     colors = colors.map((c, i) => c + step[i]);
   }
 
-  const paletteRGB = palette.map(value => `rgb(${value[0]}, ${value[1]}, ${value[2]})`);
-  document.body.style.background = `repeating-linear-gradient(
+  const paletteRGB = palette.map(value => `rgb(${Math.floor(value[0])}, ${Math.floor(value[1])}, ${Math.floor(value[2])})`);
+
+  // Plain color background is a fallback in case a browser has issues with the linear gradient
+  document.body.style.background = paletteRGB[10];
+  document.body.style.backgroundImage = `repeating-linear-gradient(
                                       -45deg,
                                       ${paletteRGB[10]},
                                       ${paletteRGB[10]} 30px,

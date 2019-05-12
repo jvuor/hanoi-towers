@@ -5,6 +5,7 @@ import { SolutionDisplay } from './components/SolutionDisplay';
 import { SolutionBuilder } from './components/SolutionBuilder';
 import { Solution } from './util/towers.interface';
 import Footer from './components/Footer';
+import { isSafari } from './util/browserDetection';
 
 interface AppState {
   discs: number,
@@ -33,7 +34,7 @@ class App extends React.Component {
       <div className="center">
         <div>
           <div className="container container-header">
-            <div className="header-effect">
+            <div className={isSafari() ? "" : "header-effect"}>
               Tower of Hanoi
             </div>
           </div>
