@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "70de7c05fbb440bbb005382af1450ba0",
+    "revision": "e96c155fe912d575fa40024ebcd8a6d9",
     "url": "/hanoi-towers/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/hanoi-towers/static/css/2.41480559.chunk.css"
   },
   {
-    "revision": "37d06ee1414853f71f60",
+    "revision": "a0eabc0144dc247a5503",
     "url": "/hanoi-towers/static/css/main.0786677f.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/hanoi-towers/static/js/2.822110ba.chunk.js"
   },
   {
-    "revision": "37d06ee1414853f71f60",
-    "url": "/hanoi-towers/static/js/main.5e62f1a1.chunk.js"
+    "revision": "a0eabc0144dc247a5503",
+    "url": "/hanoi-towers/static/js/main.393a8f9f.chunk.js"
   },
   {
     "revision": "c94116ca038f61f2ac0b",
